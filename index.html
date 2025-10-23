@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Website Kece</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(white, #00b300);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h2 {
+      color: #222;
+      margin-bottom: 30px;
+    }
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      grid-gap: 40px;
+    }
+    .dot {
+      width: 60px;
+      height: 60px;
+      border: 2px solid gray;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .dot.active {
+      background: #00b300;
+      color: white;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>Masukkan Pola Privasi Anda</h2>
+  <div class="pattern-grid" id="patternGrid"></div>
+
+  <script src="pola.js"></script>
+</body>
+</html>
