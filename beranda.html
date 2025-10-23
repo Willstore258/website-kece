@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Beranda - Website Kece</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(white, #00b300);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      width: 100%;
+      padding: 10px;
+      background: #009933;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu {
+      position: relative;
+    }
+    .menu button {
+      background: white;
+      color: black;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .menu-list {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background: white;
+      display: none;
+      flex-direction: column;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .menu-list button {
+      padding: 10px;
+      border: none;
+      background: none;
+      text-align: left;
+      cursor: pointer;
+    }
+    .menu:hover .menu-list {
+      display: flex;
+    }
+    h1 {
+      margin-top: 100px;
+      color: #222;
+    }
+    #jamContainer {
+      display: none;
+      background: black;
+      color: red;
+      padding: 20px;
+      margin-top: 20px;
+      font-size: 2em;
+      width: 80%;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      border-radius: 10px;
+    }
+    @keyframes slide {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    #jamText {
+      display: inline-block;
+      animation: slide 10s linear infinite;
+    }
+    #kalkulator, #kalender {
+      display: none;
+      margin-top: 30px;
+    }
+    footer {
+      position: absolute;
+      bottom: 10px;
+      color: #222;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      padding: 10px;
+      width: 200px;
+      margin: 5px;
+      text-align: right;
+    }
+    button.calc {
+      padding: 10px;
+      width: 50px;
+      margin: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h3>Website Kece</h3>
+    <div class="menu">
+      <button>☰ Menu</button>
+      <div class="menu-list">
+        <button onclick="tampilJam()">Jam</button>
+        <button onclick="tampilKalkulator()">Kalkulator</button>
+        <button onclick="tampilKalender()">Kalender</button>
+      </div>
+    </div>
+  </header>
+  <h1>Welcome</h1>
+  <div id="jamContainer"><span id="jamText"></span></div>
+  <div id="kalkulator">
+    <input type="text" id="calcInput" readonly><br>
+    <div>
+      <button class="calc" onclick="addVal('7')">7</button>
+      <button class="calc" onclick="addVal('8')">8</button>
+      <button class="calc" onclick="addVal('9')">9</button>
+      <button class="calc" onclick="addVal('/')">/</button><br>
+      <button class="calc" onclick="addVal('4')">4</button>
+      <button class="calc" onclick="addVal('5')">5</button>
+      <button class="calc" onclick="addVal('6')">6</button>
+      <button class="calc" onclick="addVal('*')">*</button><br>
+      <button class="calc" onclick="addVal('1')">1</button>
+      <button class="calc" onclick="addVal('2')">2</button>
+      <button class="calc" onclick="addVal('3')">3</button>
+      <button class="calc" onclick="addVal('-')">-</button><br>
+      <button class="calc" onclick="addVal('0')">0</button>
+      <button class="calc" onclick="addVal('.')">.</button>
+      <button class="calc" onclick="hitung()">=</button>
+      <button class="calc" onclick="addVal('+')">+</button><br>
+      <button class="calc" onclick="clr()">C</button>
+    </div>
+  </div>
+  <div id="kalender">
+    <h2 id="tanggalSekarang"></h2>
+  </div>
+  <footer>© Pasukan Generasi Bangsa 🇮🇩</footer>
+  <script>
+    function tampilJam() {
+      hideAll();
+      document.getElementById('jamContainer').style.display = 'block';
+      updateJam();
+      setInterval(updateJam, 1000);
+    }
+    function tampilKalkulator() {
+      hideAll();
+      document.getElementById('kalkulator').style.display = 'block';
+    }
+    function tampilKalender() {
+      hideAll();
+      document.getElementById('kalender').style.display = 'block';
+      const now = new Date();
+      const tgl = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('tanggalSekarang').innerText = tgl;
+    }
+    function hideAll() {
+      document.getElementById('jamContainer').style.display = 'none';
+      document.getElementById('kalkulator').style.display = 'none';
+      document.getElementById('kalender').style.display = 'none';
+    }
+    function updateJam() {
+      const now = new Date();
+      const waktu = now.toLocaleTimeString('id-ID') + ' | ' + 
+                    now.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
+      document.getElementById('jamText').innerText = waktu;
+    }
+    let calcInput = document.getElementById('calcInput');
+    function addVal(val) { calcInput.value += val; }
+    function hitung() {
+      try { calcInput.value = eval(calcInput.value); }
+      catch { calcInput.value = 'Error'; }
+    }
+    function clr() { calcInput.value = ''; }
+  </script>
+</body>
+</html>
